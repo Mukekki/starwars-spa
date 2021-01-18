@@ -1,13 +1,15 @@
 <template>
     <div>
-        <div class="lds-hourglass"
-        v-if="planets.length < 1"></div>
+        <div class="overflow"
+        v-if="planets.length < 1">
+            <div class="lds-hourglass"></div>
+        </div>
         <planetcard 
         v-else
-        v-for="(planet, i) of planets" :key="planet.id"
+        v-for="(planet) of planets" :key="planet.id"
         v-bind:planet="planet"
-        v-bind:index="i"
         />
+        
     </div>
 </template>
 
@@ -28,18 +30,20 @@ export default {
         fetch("https://swapi.dev/api/planets/")
         .then(response => response.json())
         .then(json => this.planets = json.results)
+
     }
 }
 </script>
 
 <style>
     .lds-hourglass {
-        padding-top: 2rem;
+        padding-top: 25%;
         margin: 0 auto;
         display: block;
         position: relative;
         width: 80px;
         height: 80px;
+        z-index: 1001;
     }
     .lds-hourglass:after {
 
@@ -68,4 +72,13 @@ export default {
         }
     }
 
+    .overflow {
+        position: fixed;
+        left: 0;
+        top: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(37, 37, 37);
+        z-index: 1000;
+    }
 </style>

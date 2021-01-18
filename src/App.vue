@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-            <navbar />
+        <navbar />
         <div class="container">
             <router-view/>
         </div>
@@ -27,7 +27,7 @@ export default {
 </script>
 <style>
     .container {
-        background-color: rgba(255, 255, 255, 0.295);
+        background-color: rgba(37, 37, 37, 0.295);
         padding: 10px;
     }
 </style>
