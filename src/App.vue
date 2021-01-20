@@ -2,7 +2,8 @@
     <div id="app">
         <navbar />
         <div class="container">
-            <router-view/>
+            <router-view
+            :key="$route.path"/>
         </div>
     </div>
 </template>
@@ -27,7 +28,10 @@ export default {
 </script>
 <style>
     .container {
-        background-color: rgba(37, 37, 37, 0.295);
+        background-color: rgba(87, 87, 87, 0.295);
         padding: 10px;
     }
+    .card-content {
+    min-height: 145px;
+}
 </style>

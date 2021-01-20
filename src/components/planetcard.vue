@@ -1,5 +1,5 @@
 <template>
-        <div class="card ">
+        <div class="card">
             <div class="card-image waves-effect waves-block waves-light col s12">
                 <img class="activator" :src="findImage">
             </div>
@@ -10,7 +10,20 @@
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">{{planet.name}}<i class="material-icons right">close</i></span>
-                <p>{{planet}}</p>
+                <div class="card-content">
+                    <div>Period rotation : {{planet.rotation_period}}</div>
+                    <div>Orbital period : {{planet.orbital_period}}</div>
+                    <div>Diameter : {{planet.diameter}}</div>
+                    <div>Climate : {{planet.climate}}</div>
+                    <div>Gravity : {{planet.gravity}}</div>
+                    <div>Terrain : {{planet.terrain}}</div>
+                    <div>Surface water : {{planet.surface_water}}</div>
+                    <div>Population : {{planet.population}}</div>
+                    <router-link
+                    tag="button"
+                    class="waves-effect waves-light btn-large deep-purple darken-4"
+                    :to="'/planetpage/' + planet.name"> Learn more </router-link>
+                </div>
             </div>
         </div>
 </template>
@@ -19,13 +32,14 @@
 export default {
     name: 'planetcard',
     props: {
-      planet: {
-         type: Object,
+      link: {
+         type: String,
          required: true
       }
-   },
+    },
    data() {
         return {
+            planet: {},
             planetphoto: [
                 {name: 'Tatooine',images: '2.jpg'},
                 {name: 'Alderaan',images: '1.png'},
@@ -35,7 +49,7 @@ export default {
                 {name: 'Bespin',images: 'vfhsarvog4t11.jpg'},
                 {name: 'Endor',images: 'f0855d03f0c81856c1860ff818f28ae558ba4589r1-1920-1080v2_uhq.jpg'},
                 {name: 'Naboo', images: 'wp3724197.jpg'},
-                {name: 'Coruscant',images: 'fDSC100142932.jpg'},
+                {name: 'Coruscant',images: 'Background_6.jpg'},
                 {name: 'Kamino', images: 'artsfon.com-147871.jpg'},
             ],
         }
@@ -45,24 +59,40 @@ export default {
             const object = this.planetphoto.find((planet) => {
                 return planet.name === this.planet.name
             })
-            console.log(object)
             if (object !== undefined) {
             return require(`../assets/images/planets/${object.images}`)
             }
             else {
-                console.error('can\'t find image')
-            return '#'}
+                return ''}
         }
     },
     components: {
 
     },
     mounted() {
+        fetch(this.link)
+        .then(response => response.json())
+        .then(json => this.planet = json)
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.card-content {
+    div{
+        padding: 3px;
+        margin: 0 auto;
+    }
+    button{
+        bottom: -10px;
+        margin: 0 auto;
+    }
+    margin: 0 auto;
+}
+p {
+        display: block;
+        margin: 0 auto;
+}
 .card-content {
     min-height: 135px;
 }

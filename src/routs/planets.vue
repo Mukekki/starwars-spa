@@ -1,15 +1,52 @@
 <template>
     <div>
         <div class="overflow"
-        v-if="planets.length < 1">
+        v-if="!planets.results">
             <div class="lds-hourglass"></div>
         </div>
         <planetcard 
         v-else
-        v-for="(planet) of planets" :key="planet.id"
-        v-bind:planet="planet"
+        v-for="(planet) of planets.results" :key="planet.name"
+        v-bind:link="planet.url"
         />
-        
+        <div class="pagebuttons">
+            <router-link 
+            v-bind:class="{disabled: !planets.previous }"
+            tag="button"
+            class="waves-effect waves-light btn-large deep-purple darken-4"
+            :to="'/planets/' + this.previospage">back</router-link>
+            <div>
+                <router-link
+                tag="button"
+                :to="'/planets/1'"
+                class="waves-effect waves-light btn-large indigo darken-3">1</router-link>
+                <router-link
+                tag="button"
+                :to="'/planets/2'"
+                class="waves-effect waves-light btn-large indigo darken-3">2</router-link>
+                <router-link
+                tag="button"
+                :to="'/planets/3'"
+                class="waves-effect waves-light btn-large indigo darken-3">3</router-link>
+                <router-link
+                tag="button"
+                :to="'/planets/4'"
+                class="waves-effect waves-light btn-large indigo darken-3">4</router-link>
+                <router-link
+                tag="button"
+                :to="'/planets/5'"
+                class="waves-effect waves-light btn-large indigo darken-3">5</router-link>
+                <router-link
+                tag="button"
+                :to="'/planets/6'"
+                class="waves-effect waves-light btn-large indigo darken-3">6</router-link>
+            </div>
+            <router-link
+            v-bind:class="{disabled: !planets.next }"
+            tag="button"
+            class="waves-effect waves-light btn-large deep-purple darken-4"
+            :to="'/planets/' + this.nextpage">Next</router-link>
+        </div>
     </div>
 </template>
 
@@ -23,14 +60,19 @@ export default {
 
     data() {
         return {
-            planets: []
+            planets: [],
+            nextpage: +this.$route.params.number,
+            previospage: +this.$route.params.number,
         }
     },
+    methods: {
+    },
     mounted() {
-        fetch("https://swapi.dev/api/planets/")
-        .then(response => response.json())
-        .then(json => this.planets = json.results)
-
+        fetch(`http://swapi.dev/api/planets/?page=${this.$route.params.number}`)
+            .then(response => response.json())
+            .then(json => this.planets = json)    
+            this.nextpage = this.nextpage + 1
+            this.previospage = this.previospage - 1
     }
 }
 </script>
@@ -80,5 +122,9 @@ export default {
         height: 100%;
         background-color: rgb(37, 37, 37);
         z-index: 1000;
+    }
+    .pagebuttons {
+        display: flex;
+        justify-content: space-around;
     }
 </style>

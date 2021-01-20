@@ -1,12 +1,39 @@
 <template>
-    <div>
+    <div class="planetpage">
         <img class="materialboxed" width="100%" :src="findImage" ref="image">
         <div class="overflow"
         v-if="!planet.name">
             <div class="lds-hourglass"></div>
         </div>
-        <div
-        v-else>{{planet}}
+        <div v-else>
+            <div class="planetinfo">
+                <div>Period rotation : {{planet.rotation_period}}</div>
+                <div>Orbital period : {{planet.orbital_period}}</div>
+                <div>Diameter : {{planet.diameter}}</div>
+                <div>Climate : {{planet.climate}}</div>
+                <div>Gravity : {{planet.gravity}}</div>
+                <div>Terrain : {{planet.terrain}}</div>
+                <div>Surface water : {{planet.surface_water}}</div>
+                <div>Population : {{planet.population}}</div>
+            </div>
+            <div class="residents">
+                <h2>Residents</h2>
+                <div class="row">
+                    <personcard
+                    v-for="(link) of planet.residents" :key="link.id"
+                    v-bind:link="link"
+                    />
+                </div>
+            </div>
+            <div class="films">
+                <h2>Films</h2>
+                <div class="row">
+                    <filmcard
+                    v-for="(link) of planet.films" :key="link.id"
+                    v-bind:link="link"
+                    />
+                </div>
+            </div>
         </div>
 
     </div>
@@ -14,6 +41,8 @@
 
 <script>
 import M from 'materialize-css/dist/js/materialize'
+import personcard from '../components/personcard'
+import filmcard from '../components/filmcard'
 export default {
     name: 'planetpage',
     data() {
@@ -28,42 +57,56 @@ export default {
                 {name: 'Bespin',images: 'vfhsarvog4t11.jpg'},
                 {name: 'Endor',images: 'f0855d03f0c81856c1860ff818f28ae558ba4589r1-1920-1080v2_uhq.jpg'},
                 {name: 'Naboo', images: 'wp3724197.jpg'},
-                {name: 'Coruscant',images: 'fDSC100142932.jpg'},
+                {name: 'Coruscant',images: 'Background_6.jpg'},
                 {name: 'Kamino', images: 'artsfon.com-147871.jpg'},
             ],
+            persons: []
         }
     },
+    components: {
+        personcard, filmcard,
+    },
+  
     computed: {
         findImage() {
             const object = this.planetphoto.find((planet) => {
                 return planet.name === this.$route.params.name
             })
-            console.log(object)
             if (object !== undefined) {
             return require(`../assets/images/planets/${object.images}`)
             }
             else {
                 console.error('can\'t find image')
             return '#'}
-        }
+        },
+        
     },
     methods: {
+        
     },
     mounted() {
         // console.log(this.$route.params.name)
         fetch("https://swapi.dev/api/planets/")
         .then(response => response.json())
         .then(json => this.planet = json.results.find((planet) => {
+                
                 return planet.name === this.$route.params.name
             }
         ))
-            M.Materialbox.init(this.$refs.image)
+
+        M.Materialbox.init(this.$refs.image)
+        
     },
 }
 </script>
 
-<style>
-.lds-hourglass {
+<style lang="scss" scoped>
+
+    .planetpage {
+        color: rgb(255, 255, 255);
+    }
+
+    .lds-hourglass {
         padding-top: 25%;
         margin: 0 auto;
         display: block;

@@ -9,7 +9,7 @@ const routes = [
     name: 'Home',
     component: () => import('../routs/home.vue')
   },{
-    path: '/planets/',
+    path: '/planets/:number',
     name: 'planets',
     component: () => import('../routs/planets.vue')
   },{
@@ -36,6 +36,10 @@ const routes = [
     path: '/planetpage/:name',
     name: 'planetpage',
     component: () => import('../routs/planetpage.vue')
+  },{
+    path: '/personpage/:name',
+    name: 'personpage',
+    component: () => import('../routs/personpage.vue')
   },
 ]
 

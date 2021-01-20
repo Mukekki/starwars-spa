@@ -13,7 +13,7 @@
             </div>
             <div class="nav-content">
             <ul class="tabs tabs-transparent">
-                <li class="tab"><router-link class="active" to="/planets">Planets</router-link></li>
+                <li class="tab"><router-link class="active" to="/planets/1">Planets</router-link></li>
                 <li class="tab"><router-link class="active" to="/people">People</router-link></li>
                 <li class="tab"><router-link class="active" to="/films">Films</router-link></li>
                 <li class="tab"><router-link class="active" to="/species">species</router-link></li>
