@@ -1,12 +1,15 @@
 <template>
     <div class="planetpage">
-        <img class="materialboxed" width="100%" :src="findImage" ref="image">
+        <img 
+        v-if="planet.name"
+        class="materialboxed" width="100%" :src="findImage" ref="image">
         <div class="overflow"
         v-if="!planet.name">
             <div class="lds-hourglass"></div>
         </div>
-        <div v-else>
+        <div v-else-if="planet">
             <div class="planetinfo">
+                <h2>{{planet.name}}</h2>
                 <div>Period rotation : {{planet.rotation_period}}</div>
                 <div>Orbital period : {{planet.orbital_period}}</div>
                 <div>Diameter : {{planet.diameter}}</div>
@@ -60,7 +63,7 @@ export default {
                 {name: 'Coruscant',images: 'Background_6.jpg'},
                 {name: 'Kamino', images: 'artsfon.com-147871.jpg'},
             ],
-            persons: []
+            persons: [],
         }
     },
     components: {
@@ -70,7 +73,7 @@ export default {
     computed: {
         findImage() {
             const object = this.planetphoto.find((planet) => {
-                return planet.name === this.$route.params.name
+                return planet.name === this.planet.name
             })
             if (object !== undefined) {
             return require(`../assets/images/planets/${object.images}`)
@@ -82,21 +85,16 @@ export default {
         
     },
     methods: {
-        
+        fetchdata(num) {
+            fetch(`http://swapi.dev/api/planets/${num}/`)
+            .then(response => response.json())
+            .then(json => this.planet = json)
+        }
     },
     mounted() {
-        // console.log(this.$route.params.name)
-        fetch("https://swapi.dev/api/planets/")
-        .then(response => response.json())
-        .then(json => this.planet = json.results.find((planet) => {
-                
-                return planet.name === this.$route.params.name
-            }
-        ))
-
+        this.fetchdata(this.$route.params.id)
         M.Materialbox.init(this.$refs.image)
-        
-    },
+        }
 }
 </script>
 

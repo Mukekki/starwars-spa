@@ -8,7 +8,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('../routs/home.vue')
-  },{
+  },
+  // {
+  //   path: '/planet/:id',
+  //   name: 'planets',
+  //   component: () => import('../routs/planet.vue')
+  // https://swapi.dev/api/planets/ + this.id + /
+  // },
+  {
     path: '/planets/:number',
     name: 'planets',
     component: () => import('../routs/planets.vue')
@@ -33,7 +40,7 @@ const routes = [
     name: 'starships',
     component: () => import('../routs/starships.vue')
   },{
-    path: '/planetpage/:name',
+    path: '/planet/:id',
     name: 'planetpage',
     component: () => import('../routs/planetpage.vue')
   },{

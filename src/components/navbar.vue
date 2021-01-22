@@ -1,6 +1,7 @@
 <template>
     <div>
-        <nav class="nav-extended deep-purple darken-4">
+        <nav class="nav-extended deep-purple darken-4"
+        >
             <div class="nav-wrapper">
             <router-link to="/" class="brand-logo">Logo</router-link>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -19,12 +20,12 @@
                 <li class="tab"><router-link class="active" to="/species">species</router-link></li>
                 <li class="tab"><router-link class="active" to="/vehicles">vehicles</router-link></li>
                 <li class="tab"><router-link class="active" to="/starships">starships</router-link></li>
-                <li class="tab disabled"><a href="#test4">Disabled Tab</a></li>
             </ul>
             </div>
         </nav>
 
-        <ul class="sidenav" id="mobile-demo">
+        <ul class="sidenav" id="mobile-demo"
+        ref="sidenav">
             <li><a href="sass.html">Sass</a></li>
             <li><a href="badges.html">Components</a></li>
             <li><a href="collapsible.html">JavaScript</a></li>
@@ -33,12 +34,15 @@
 </template>
 
 <script>
+import M from 'materialize-css'
 export default {
     name: 'navbar',
     
     methods: {
     },
     mounted() {
+        console.log
+        M.Sidenav.init(this.$refs.sidenav, {})
     }
 } 
 </script>

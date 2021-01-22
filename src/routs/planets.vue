@@ -15,31 +15,15 @@
             tag="button"
             class="waves-effect waves-light btn-large deep-purple darken-4"
             :to="'/planets/' + this.previospage">back</router-link>
-            <div>
+            <div class="pagelinks">
                 <router-link
+                v-for="(page) of this.pages" :key="page"
+                v-bind:page="page"
+                v-bind:class="[$route.params.number === page ? 'disabled' : 'deep-purple darken-4']"
                 tag="button"
-                :to="'/planets/1'"
-                class="waves-effect waves-light btn-large indigo darken-3">1</router-link>
-                <router-link
-                tag="button"
-                :to="'/planets/2'"
-                class="waves-effect waves-light btn-large indigo darken-3">2</router-link>
-                <router-link
-                tag="button"
-                :to="'/planets/3'"
-                class="waves-effect waves-light btn-large indigo darken-3">3</router-link>
-                <router-link
-                tag="button"
-                :to="'/planets/4'"
-                class="waves-effect waves-light btn-large indigo darken-3">4</router-link>
-                <router-link
-                tag="button"
-                :to="'/planets/5'"
-                class="waves-effect waves-light btn-large indigo darken-3">5</router-link>
-                <router-link
-                tag="button"
-                :to="'/planets/6'"
-                class="waves-effect waves-light btn-large indigo darken-3">6</router-link>
+                :to="'/planets/' + page"
+                class="waves-effect waves-light btn-large indigo darken-3"
+                >{{page}}</router-link>
             </div>
             <router-link
             v-bind:class="{disabled: !planets.next }"
@@ -63,6 +47,7 @@ export default {
             planets: [],
             nextpage: +this.$route.params.number,
             previospage: +this.$route.params.number,
+            pages: ['1','2','3','4','5','6']
         }
     },
     methods: {
@@ -77,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
     .lds-hourglass {
         padding-top: 25%;
         margin: 0 auto;
@@ -127,4 +112,9 @@ export default {
         display: flex;
         justify-content: space-around;
     }
+    @media (max-width: 720px) {
+        .pagelinks {
+            display: none;
+    }}
+    
 </style>

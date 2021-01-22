@@ -6,7 +6,8 @@
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{planet.name}}<i class="material-icons right">more_vert</i></span>
                 <p><router-link 
-                tag="a" :to="'/planetpage/' + planet.name">More info...</router-link></p>
+                v-if="planet.url"
+                tag="a" :to="'/planet/' + findId(planet.url)">More info...</router-link></p>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">{{planet.name}}<i class="material-icons right">close</i></span>
@@ -22,7 +23,8 @@
                     <router-link
                     tag="button"
                     class="waves-effect waves-light btn-large deep-purple darken-4"
-                    :to="'/planetpage/' + planet.name"> Learn more </router-link>
+                    :to="'/planetpage/' + planet.name"
+                    v-bind:url="planet.url"> Learn more </router-link>
                 </div>
             </div>
         </div>
@@ -36,6 +38,11 @@ export default {
          type: String,
          required: true
       }
+    },
+    methods: {
+        findId(url) {
+            return url.match(/\d{1,}/g)[0]
+        }
     },
    data() {
         return {
@@ -51,6 +58,16 @@ export default {
                 {name: 'Naboo', images: 'wp3724197.jpg'},
                 {name: 'Coruscant',images: 'Background_6.jpg'},
                 {name: 'Kamino', images: 'artsfon.com-147871.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Utapau', images: '17abb6060f10bab2d6832af886df71ef.png'},
+                
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
             ],
         }
     },
