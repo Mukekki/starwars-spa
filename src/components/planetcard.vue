@@ -22,8 +22,9 @@
                     <div>Population : {{planet.population}}</div>
                     <router-link
                     tag="button"
+                    v-if="planet.url"
                     class="waves-effect waves-light btn-large deep-purple darken-4"
-                    :to="'/planetpage/' + planet.name"
+                    :to="'/planet/' + findId(planet.url)"
                     v-bind:url="planet.url"> Learn more </router-link>
                 </div>
             </div>
@@ -60,14 +61,32 @@ export default {
                 {name: 'Kamino', images: 'artsfon.com-147871.jpg'},
                 {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
                 {name: 'Utapau', images: '17abb6060f10bab2d6832af886df71ef.png'},
-                
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
-                {name: 'Geonosis', images: 'look.com.ua-216928.jpg'},
+                {name: 'Mustafar', images: 'futuristic-lava-concept-art-science-fiction-artwork-1920x1080-49788.jpg'},
+                {name: 'Kashyyyk', images: 'STAR_WARS_Battlefront_II_20171222121517.jpg'},
+                {name: 'Polis Massa', images: 'starwarsIII_8409.jpg'},
+                {name: 'Mygeeto', images: 'mygeeto45.jpg'},
+                {name: 'Felucia', images: '01_169_2070e38e.jpeg'},
+                {name: 'Cato Neimoidia', images: '39d4d68d65f92470b5a626eb4d8fe23be26aaaf01023c57a7007ccfd4310d06a.jpg'},
+                {name: 'Stewjon', images: ''},
+                {name: 'Corellia', images: 'Coronet-EotESoF.jpg'},
+                {name: 'Rodia', images: 'd16184f3916fa528e74a3a9a58f8b1dd.png'},
+                {name: 'Nal Hutta', images: '93089.jpg'},
+                {name: 'Dantooine', images: 'patch-5-10-3.jpg'},
+                {name: 'Bestine IV', images: '5eb56859fc593d5a2757c87d.png'},
+                {name: 'Ord Mantell', images: 'image_cdc70c91.jpeg'},
+                {name: 'Trandosha', images: 'swtor-patch-3_1.jpg'},
+                {name: 'Socorro', images: '805f2429857cc67df9e4ece11961c121.jpg'},
+                {name: 'Mon Cala', images: 'mon-cala-city.jpg'},
+                {name: 'Chandrila', images: '2E2F2807-4535-411C-892D-995249738FBF.jpeg'},
+                {name: 'Sullust', images: '29040c433aadcb8a724660b4c7780055.jpg'},
+                {name: 'Toydaria', images: 'databank_toydaria_01_169_70b20e0e.jpeg'},
+                {name: 'Malastare', images: 'databank_malastare_01_169_59df245f.jpeg'},
+                {name: 'Dathomir', images: 'maxresdefault.jpg'},
+                {name: 'Ryloth', images: 'clone-wars1x20_0242.jpg'},
+                {name: '', images: '.jpg'},
+                {name: '', images: '.jpg'},
+                {name: '', images: '.jpg'},
+                {name: '', images: '.jpg'},
             ],
         }
     },
@@ -76,11 +95,11 @@ export default {
             const object = this.planetphoto.find((planet) => {
                 return planet.name === this.planet.name
             })
-            if (object !== undefined) {
+            if (object && object.images !== '') {
             return require(`../assets/images/planets/${object.images}`)
             }
             else {
-                return ''}
+                return require(`../assets/images/planets/nophoto-1.jpg`)}
         }
     },
     components: {
@@ -90,6 +109,8 @@ export default {
         fetch(this.link)
         .then(response => response.json())
         .then(json => this.planet = json)
+
+        
     }
 }
 </script>

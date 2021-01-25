@@ -15,7 +15,7 @@
             <div class="nav-content">
             <ul class="tabs tabs-transparent">
                 <li class="tab"><router-link class="active" to="/planets/1">Planets</router-link></li>
-                <li class="tab"><router-link class="active" to="/people">People</router-link></li>
+                <li class="tab"><router-link class="active" to="/people/1">People</router-link></li>
                 <li class="tab"><router-link class="active" to="/films">Films</router-link></li>
                 <li class="tab"><router-link class="active" to="/species">species</router-link></li>
                 <li class="tab"><router-link class="active" to="/vehicles">vehicles</router-link></li>
@@ -41,7 +41,6 @@ export default {
     methods: {
     },
     mounted() {
-        console.log
         M.Sidenav.init(this.$refs.sidenav, {})
     }
 } 

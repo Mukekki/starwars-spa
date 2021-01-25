@@ -16,11 +16,11 @@ const routes = [
   // https://swapi.dev/api/planets/ + this.id + /
   // },
   {
-    path: '/planets/:number',
+    path: '/planets/:pageid',
     name: 'planets',
     component: () => import('../routs/planets.vue')
   },{
-    path: '/people/',
+    path: '/people/:pageid',
     name: 'people',
     component: () => import('../routs/people.vue')
   },{
@@ -44,7 +44,7 @@ const routes = [
     name: 'planetpage',
     component: () => import('../routs/planetpage.vue')
   },{
-    path: '/personpage/:name',
+    path: '/personpage/:id',
     name: 'personpage',
     component: () => import('../routs/personpage.vue')
   },

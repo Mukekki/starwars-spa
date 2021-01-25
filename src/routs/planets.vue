@@ -19,7 +19,7 @@
                 <router-link
                 v-for="(page) of this.pages" :key="page"
                 v-bind:page="page"
-                v-bind:class="[$route.params.number === page ? 'disabled' : 'deep-purple darken-4']"
+                v-bind:class="[$route.params.pageid === page ? 'disabled' : 'deep-purple darken-4']"
                 tag="button"
                 :to="'/planets/' + page"
                 class="waves-effect waves-light btn-large indigo darken-3"
@@ -45,19 +45,17 @@ export default {
     data() {
         return {
             planets: [],
-            nextpage: +this.$route.params.number,
-            previospage: +this.$route.params.number,
+            nextpage: +this.$route.params.pageid + 1,
+            previospage: +this.$route.params.pageid - 1,
             pages: ['1','2','3','4','5','6']
         }
     },
     methods: {
     },
     mounted() {
-        fetch(`http://swapi.dev/api/planets/?page=${this.$route.params.number}`)
+        fetch(`http://swapi.dev/api/planets/?page=${this.$route.params.pageid}`)
             .then(response => response.json())
-            .then(json => this.planets = json)    
-            this.nextpage = this.nextpage + 1
-            this.previospage = this.previospage - 1
+            .then(json => this.planets = json)
     }
 }
 </script>
@@ -112,7 +110,7 @@ export default {
         display: flex;
         justify-content: space-around;
     }
-    @media (max-width: 720px) {
+    @media (max-width: 470px) {
         .pagelinks {
             display: none;
     }}
