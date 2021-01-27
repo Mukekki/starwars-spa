@@ -1,4 +1,5 @@
 <template>
+    <div class="col s12 m6">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light col s12">
                 <img class="activator" :src="findImage">
@@ -29,6 +30,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -143,5 +145,9 @@ p {
 }
 i:hover {
     color: rgba(82, 34, 255, 0.692);
+}
+
+.secondpage {
+    max-width: 145px;
 }
 </style>

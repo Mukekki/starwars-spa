@@ -17,6 +17,12 @@
                 <div>birth_year : {{person.birth_year}}</div>
                 <div>gender : {{person.gender}}</div>
             </div>
+            <div class="homeworld">
+                <h2>Homoworld</h2>
+                <planetcard 
+                v-if="this.person.homeworld"
+                v-bind:link="this.person.homeworld"/>
+            </div>
             <div class="films">
                 <h2>Films</h2>
                 <div class="row">
@@ -34,6 +40,7 @@
 <script>
 import M from 'materialize-css'
 import filmcard from '../components/filmcard'
+import planetcard from '../components/planetcard'
 export default {
     name: 'personpage',
     data() {
@@ -45,7 +52,7 @@ export default {
     props: {
     },
     components: {
-        filmcard
+        filmcard, planetcard
     },
     methods: {
         findImage() {
@@ -56,7 +63,6 @@ export default {
             return require(`../assets/images/planets/${object.images}`)
             }
             else {
-                console.log('error')
             return require(`../assets/images/planets/nophoto-1.jpg`)
             }
         },

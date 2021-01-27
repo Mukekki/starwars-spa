@@ -16,7 +16,7 @@
             <ul class="tabs tabs-transparent">
                 <li class="tab"><router-link class="active" to="/planets/1">Planets</router-link></li>
                 <li class="tab"><router-link class="active" to="/people/1">People</router-link></li>
-                <li class="tab"><router-link class="active" to="/films">Films</router-link></li>
+                <li class="tab"><router-link class="active" to="/films/1">Films</router-link></li>
                 <li class="tab"><router-link class="active" to="/species">species</router-link></li>
                 <li class="tab"><router-link class="active" to="/vehicles">vehicles</router-link></li>
                 <li class="tab"><router-link class="active" to="/starships">starships</router-link></li>

@@ -29,6 +29,7 @@ export default {
 <style>
     .container {
         background-color: rgba(87, 87, 87, 0.295);
+        color: white;
         padding: 10px;
     }
     .card-content {
@@ -81,5 +82,16 @@ export default {
         border-color: #cef transparent #cef transparent;
         animation: lds-hourglass 1.2s infinite;
     }
-    
+    h2 {
+        text-align: center;
+    }
+    .card-reveal {
+    color: black;
+    }
+    .card-image.waves-effect.waves-block.waves-light.col.s12{
+        min-height: 200px;
+        padding: 0;
+        background-color: rgba(255, 255, 255, 0.596);
+    }
+
 </style>

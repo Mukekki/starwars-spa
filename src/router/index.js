@@ -24,7 +24,7 @@ const routes = [
     name: 'people',
     component: () => import('../routs/people.vue')
   },{
-    path: '/films',
+    path: '/films/:pageid',
     name: 'films',
     component: () => import('../routs/films.vue')
   },{
@@ -47,6 +47,10 @@ const routes = [
     path: '/personpage/:id',
     name: 'personpage',
     component: () => import('../routs/personpage.vue')
+  },{
+    path: '/filmpage/:id',
+    name: 'filmpage',
+    component: () => import('../routs/filmpage.vue')
   },
 ]
 

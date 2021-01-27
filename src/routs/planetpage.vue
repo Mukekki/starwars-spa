@@ -1,5 +1,9 @@
 <template>
     <div class="planetpage">
+        <div class="data">
+            <div><span>Created </span>{{new Date(planet.created).toLocaleDateString()}}</div>
+            <div><span>Edited </span>{{new Date(planet.edited).toLocaleDateString()}}</div>
+        </div>
         <img 
         class="materialboxed" width="100%" :src="findImage" ref="image">
         <div class="overflow"
@@ -69,7 +73,6 @@ export default {
                 {name: 'Mygeeto', images: 'mygeeto45.jpg'},
                 {name: 'Felucia', images: '01_169_2070e38e.jpeg'},
                 {name: 'Cato Neimoidia', images: '39d4d68d65f92470b5a626eb4d8fe23be26aaaf01023c57a7007ccfd4310d06a.jpg'},
-                {name: 'Stewjon', images: ''},
                 {name: 'Corellia', images: 'Coronet-EotESoF.jpg'},
                 {name: 'Rodia', images: 'd16184f3916fa528e74a3a9a58f8b1dd.png'},
                 {name: 'Nal Hutta', images: '93089.jpg'},
@@ -126,7 +129,16 @@ export default {
     .planetpage {
         color: rgb(255, 255, 255);
     }
-
+    .data {
+        text-align: right;
+        div {
+        text-align: right;
+        color: rgb(150, 150, 150);
+            span {
+                color: rgb(100, 100, 100)
+            }
+        }
+    }
     
     
 </style>

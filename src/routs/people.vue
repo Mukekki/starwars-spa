@@ -10,7 +10,7 @@
         v-for="(person) of persons.results" :key="person.id"
         v-bind:link="person.url"
         />
-        
+
         <div class="pagebuttons">
             <router-link 
             v-bind:class="{disabled: !persons.previous }"
