@@ -63,6 +63,18 @@
                     />
                 </div>
             </div>
+            <div class="vehicles"
+            v-if="person.starships.length >= 1">
+                <hr>
+                <h2>Starships
+                </h2>
+                <div class="row">
+                    <starshipcard 
+                    v-for="(ship) of person.starships" :key='ship'
+                    v-bind:link='ship'
+                    />
+                </div>
+            </div>
         </div>
 
     </div>
@@ -74,6 +86,7 @@ import filmcard from '../components/filmcard'
 import planetcard from '../components/planetcard'
 import speciescard from '../components/speciescard'
 import vehiclecard from '../components/vehiclecard'
+import starshipcard from '../components/starshipcard'
 export default {
     name: 'personpage',
     data() {
@@ -86,7 +99,7 @@ export default {
     props: {
     },
     components: {
-        filmcard, planetcard, speciescard, vehiclecard
+        filmcard, planetcard, speciescard, vehiclecard, starshipcard
     },
     methods: {
         findImage() {
