@@ -1,44 +1,55 @@
 <template>
     <div class="page">
         <div class="data">
-            <div><span>Created </span>{{new Date(film.created).toLocaleDateString()}}</div>
-            <div><span>Edited </span>{{new Date(film.edited).toLocaleDateString()}}</div>
+            <div><span>Created </span>{{new Date(type.created).toLocaleDateString()}}</div>
+            <div><span>Edited </span>{{new Date(type.edited).toLocaleDateString()}}</div>
         </div>
         <img 
         class="materialboxed" width="100%" :src="findImage" ref="image">
         <div class="overflow"
-        v-if="!film.title">
+        v-if="!type.name">
             <div class="lds-hourglass"></div>
         </div>
-        <div v-else-if="film">
+        <div v-else-if="type">
             <div class="info">
                 <hr>
-                <h2>{{film.title}}</h2>
-                <div>{{film.opening_crawl}}</div>
+                <h2>{{type.name}}</h2>
+                <h3>Info</h3>
+                <div>Classification : {{type.classification}}</div>
+                <div>Designation : {{type.designation}}</div>
+                <div>Average height : {{type.average_height}}</div>
+                <div>Skin color : {{type.skin_colors}}</div>
+                <div>Hair colors : {{type.hair_colors}}</div>
+                <div>Eye colors : {{type.eye_colors}}</div>
+                <div>Average lifespan : {{type.average_lifespan}}</div>
+                <div>Language : {{type.language}}</div>
+            </div>
+            <div class="homeworld"
+            v-if="type.homeworld !== null">
                 <hr>
-                <div>Producer - {{film.producer}} </div>
-                <div>Director - {{film.director}}</div>
-                <div>Release date - {{film.release_date}}</div>
+                <h2>Homeworld</h2>
+                <planetcard 
+                v-bind:link="type.homeworld"/>
             </div>
             <div class="characters"
-            v-if="film.characters">
+            v-if="type.people">
+                <hr>
                 <div class="row">
-                    <hr>
-                    <h2>Characters</h2>
+                    <h2>People</h2>
                     <personcard
-                    v-for="(link) of film.characters" :key="link.id"
+                    v-for="(link) of type.people" :key="link.id"
                     v-bind:link="link"
                     />
                 </div>
+            <hr>
             </div>
-            <div class="planets"
-            v-if="film.planets">
+            <div class="films"
+            v-if="type.films">
                 <div class="row">
-                    <hr>
-                    <h2>Planets</h2>
-                    <planetcard
-                    v-for="(planet) of film.planets" :key="planet.url"
-                    v-bind:link="planet"
+                    <h2>Films</h2>
+                    <filmcard
+                    v-for="(film) of type.films" :key="film"
+                    v-bind:link="film"
                     />
                 </div>
             </div>
@@ -50,32 +61,28 @@
 <script>
 import M from 'materialize-css/dist/js/materialize'
 import personcard from '../components/personcard'
+import filmcard from '../components/filmcard'
 import planetcard from '../components/planetcard'
 export default {
-    name: 'filmpage',
+    name: 'speciespage',
     data() {
         return {
-            film: {},
-            filmsphoto: [
-                {name: 'A New Hope',images: 'A New Hope.jpg'},
-                {name: 'The Empire Strikes Back',images: 'The Empire Strikes Back.jpg'},
-                {name: 'Return of the Jedi',images: 'Return of the Jedi.jpg'},
-                {name: 'The Phantom Menace',images: 'The Phantom Menace.jpeg'},
-                {name: 'Revenge of the Sith',images: 'Revenge of the Sith.jpg'},
-                {name: 'Attack of the Clones',images: 'Attack of the Clones.jpg'},
+            type: {},
+            typephoto: [
             ],
-            persons: [],
             image: {}
         }
     },
     components: { 
-        personcard, planetcard
+        personcard, 
+        filmcard,
+        planetcard
     },
   
     computed: {
         findImage() {
-            const object = this.filmsphoto.find((object) => {
-                return object.name === this.film.title
+            const object = this.typephoto.find((object) => {
+                return object.name === this.type.name
             })
             if (object !== undefined) {
             return require(`../assets/images/films/${object.images}`)
@@ -86,12 +93,12 @@ export default {
         },
         
     },
-    methods: {
+    methods: { 
         fetchdata(num) {
-            fetch(`http://swapi.dev/api/films/${num}/`)
+            fetch(`http://swapi.dev/api/species/${num}/`)
             .then(responce => responce.ok ? responce : Promise.reject(responce))
             .then(response => response.json())
-            .then(json => this.film = json)
+            .then(json => this.type = json)
             .catch(() => this.$router.push('/error'))
         }
     },

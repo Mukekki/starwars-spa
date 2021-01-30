@@ -56,9 +56,10 @@ export default {
     },
     mounted() {
         fetch(`https://swapi.dev/api/people/?page=${this.$route.params.pageid}`)
-        .then(response => response.json())
-        .then(json => this.persons = json)
-        
+        .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(response => response.json())
+            .then(json => this.persons = json)
+            .catch(() => this.$router.push('/error'))
     }
 }
 </script>

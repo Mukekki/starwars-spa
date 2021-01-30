@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <navbar />
+        <navbar
+        :key="$route.path" />
         <div class="container">
             <router-view
             :key="$route.path"/>
@@ -26,7 +27,7 @@ export default {
         }
 }
 </script>
-<style>
+<style lang="scss">
     .container {
         background-color: rgba(87, 87, 87, 0.295);
         color: white;
@@ -93,5 +94,32 @@ export default {
         padding: 0;
         background-color: rgba(255, 255, 255, 0.596);
     }
-
+    .data {
+        text-align: right;
+        div {
+        text-align: right;
+        color: rgb(150, 150, 150);
+            span {
+                color: rgb(100, 100, 100)
+            }
+        }
+    }
+    .pagebuttons {
+        display: flex;
+        justify-content: space-around;
+    }
+    h2 {
+        background-color: rgba(0, 0, 0, 0.425);
+        border-radius: 25px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    @media (max-width: 584px) {
+        .pagelinks {
+            display: none;
+    }}
+    @media (max-width: 992px) {
+        .tabs.tabs-transparent {
+            display: none;
+    }}
 </style>

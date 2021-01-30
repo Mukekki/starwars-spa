@@ -1,5 +1,5 @@
 <template>
-    <div class="planetpage">
+    <div class="page">
         <div class="data">
             <div><span>Created </span>{{new Date(planet.created).toLocaleDateString()}}</div>
             <div><span>Edited </span>{{new Date(planet.edited).toLocaleDateString()}}</div>
@@ -12,7 +12,9 @@
         </div>
         <div v-else-if="planet">
             <div class="planetinfo">
+                <hr>
                 <h2>{{planet.name}}</h2>
+                <h3>info</h3>
                 <div>Period rotation : {{planet.rotation_period}}</div>
                 <div>Orbital period : {{planet.orbital_period}}</div>
                 <div>Diameter : {{planet.diameter}}</div>
@@ -22,7 +24,9 @@
                 <div>Surface water : {{planet.surface_water}}</div>
                 <div>Population : {{planet.population}}</div>
             </div>
-            <div class="residents">
+            <div class="residents"
+            v-if="planet.residents.length >= 1">
+                <hr>
                 <h2>Residents</h2>
                 <div class="row">
                     <personcard
@@ -31,7 +35,9 @@
                     />
                 </div>
             </div>
-            <div class="films">
+            <div class="films"
+            v-if="planet.films.length >= 1">
+                <hr>
                 <h2>Films</h2>
                 <div class="row">
                     <filmcard
@@ -90,6 +96,7 @@ export default {
                 {name: 'Ryloth', images: 'clone-wars1x20_0242.jpg'},
             ],
             persons: [],
+            image: {}
         }
     },
     components: {
@@ -113,31 +120,28 @@ export default {
     methods: {
         fetchdata(num) {
             fetch(`http://swapi.dev/api/planets/${num}/`)
+            .then(responce => responce.ok ? responce : Promise.reject(responce))
             .then(response => response.json())
             .then(json => this.planet = json)
+            .catch(() => this.$router.push('/error'))
         }
     },
     mounted() {
         this.fetchdata(this.$route.params.id)
-        M.Materialbox.init(this.$refs.image)
+        this.image = M.Materialbox.init(this.$refs.image)
+        },
+    destroyed() {
+        if (this.image && this.image.destoy){
+            this.image.destroy()
         }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 
-    .planetpage {
+    .page {
         color: rgb(255, 255, 255);
-    }
-    .data {
-        text-align: right;
-        div {
-        text-align: right;
-        color: rgb(150, 150, 150);
-            span {
-                color: rgb(100, 100, 100)
-            }
-        }
     }
     
     

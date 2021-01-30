@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <nav class="nav-extended deep-purple darken-4"
-        >
+    <div class="nav">
+        <nav class="nav-extended deep-purple darken-4">
             <div class="nav-wrapper">
-            <router-link to="/" class="brand-logo">Logo</router-link>
+            <router-link to="/" class="brand-logo"><img src="../assets/vader.png" alt="#" style="width: 40px; padding-top: 10px;"></router-link>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                
-                <li><a href="sass.html">1</a></li>
-                <li><a href="badges.html">2</a></li>
-                <li><a href="collapsible.html">3</a></li>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><router-link tag="a" to="/">Home</router-link></li>
+                    <li><router-link tag="a" to="/about/">About this project</router-link></li>
+                </ul>
             </ul>
             </div>
             <div class="nav-content">
@@ -17,18 +16,21 @@
                 <li class="tab"><router-link class="active" to="/planets/1">Planets</router-link></li>
                 <li class="tab"><router-link class="active" to="/people/1">People</router-link></li>
                 <li class="tab"><router-link class="active" to="/films/1">Films</router-link></li>
-                <li class="tab"><router-link class="active" to="/species">species</router-link></li>
-                <li class="tab"><router-link class="active" to="/vehicles">vehicles</router-link></li>
-                <li class="tab"><router-link class="active" to="/starships">starships</router-link></li>
+                <li class="tab"><router-link class="active" to="/species/1">Species</router-link></li>
+                <li class="tab"><router-link class="active" to="/vehicles/1">Vehicles</router-link></li>
+                <li class="tab"><router-link class="active" to="/starships/1">Starships</router-link></li>
             </ul>
             </div>
         </nav>
 
         <ul class="sidenav" id="mobile-demo"
         ref="sidenav">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li class="tab" tag='a'><router-link class="active" to="/planets/1">Planets</router-link></li>
+            <li class="tab" tag='a'><router-link class="active" to="/people/1">People</router-link></li>
+            <li class="tab" tag='a'><router-link class="active" to="/films/1">Films</router-link></li>
+            <li class="tab" tag='a'><router-link class="active" to="/species/1">species</router-link></li>
+            <li class="tab" tag='a'><router-link class="active" to="/vehicles/1">vehicles</router-link></li>
+            <li class="tab" tag='a'><router-link class="active" to="/starships/1">starships</router-link></li>
         </ul>
     </div>
 </template>
@@ -37,16 +39,31 @@
 import M from 'materialize-css'
 export default {
     name: 'navbar',
-    
+    props: {
+    },
+
+    data(){
+        return{
+            sidenav: {}
+        }
+    },
     methods: {
     },
     mounted() {
-        M.Sidenav.init(this.$refs.sidenav, {})
+        this.sidenav = M.Sidenav.init(this.$refs.sidenav, {
+            onCloseStart() {
+            }
+        })
+    },
+    destroyed(){
+        if (this.sidenav && this.sidenav.destroy){
+            this.sidenav.destroy()
+        }
     }
 } 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nav-wrapper {
     padding: 0px 15px;
 }

@@ -2,7 +2,7 @@
     <div class="col s12 m6">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light col s12">
-                <img class="activator" :src="findImage">
+                <img class="activator" :src="findImage()">
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{planet.name}}<i class="material-icons right">more_vert</i></span>
@@ -45,6 +45,16 @@ export default {
     methods: {
         findId(url) {
             return url.match(/\d{1,}/g)[0]
+        },
+        findImage() {
+            const object = this.planetphoto.find((planet) => {
+                return planet.name === this.planet.name
+            })
+            if (object && object.images !== '') {
+            return require(`../assets/images/planets/${object.images}`)
+            }
+            else {
+                return require(`../assets/images/planets/nophoto-1.jpg`)}
         }
     },
    data() {
@@ -93,16 +103,7 @@ export default {
         }
     },
     computed: {
-        findImage() {
-            const object = this.planetphoto.find((planet) => {
-                return planet.name === this.planet.name
-            })
-            if (object && object.images !== '') {
-            return require(`../assets/images/planets/${object.images}`)
-            }
-            else {
-                return require(`../assets/images/planets/nophoto-1.jpg`)}
-        }
+        
     },
     components: {
 
