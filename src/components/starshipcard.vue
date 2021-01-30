@@ -13,7 +13,6 @@
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">{{ship.name}}<i class="material-icons right">close</i></span>
                 <div class="card-content">
-                    planet
                     <router-link
                     tag="button"
                     v-if="ship.url"
