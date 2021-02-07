@@ -89,7 +89,7 @@ export default {
     methods: {
         fetchdata(num) {
             fetch(`http://swapi.dev/api/films/${num}/`)
-            .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(response => response.ok ? response : Promise.reject(response))
             .then(response => response.json())
             .then(json => this.film = json)
             .catch(() => this.$router.push('/error'))

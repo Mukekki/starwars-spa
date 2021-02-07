@@ -25,7 +25,7 @@ export default {
     },
     mounted() {
         fetch(`https://swapi.dev/api/films/`)
-        .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(response => response.ok ? response : Promise.reject(response))
             .then(response => response.json())
             .then(json => this.films = json)
             .catch(() => this.$router.push('/error'))

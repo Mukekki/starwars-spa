@@ -120,7 +120,7 @@ export default {
     methods: {
         fetchdata(num) {
             fetch(`http://swapi.dev/api/planets/${num}/`)
-            .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(response => response.ok ? response : Promise.reject(response))
             .then(response => response.json())
             .then(json => this.planet = json)
             .catch(() => this.$router.push('/error'))

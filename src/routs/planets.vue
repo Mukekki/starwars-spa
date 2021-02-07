@@ -54,7 +54,7 @@ export default {
     },
     mounted() {
         fetch(`http://swapi.dev/api/planets/?page=${this.$route.params.pageid}`)
-            .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(response => response.ok ? response : Promise.reject(response))
             .then(response => response.json())
             .then(json => this.planets = json)
             .catch(() => this.$router.push('/error'))

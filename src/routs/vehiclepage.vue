@@ -84,7 +84,7 @@ export default {
     },
     mounted() {
         fetch(`http://swapi.dev/api/vehicles/${this.$route.params.id}/`)
-        .then(responce => responce.ok ? responce : Promise.reject(responce))
+            .then(response => response.ok ? response : Promise.reject(response))
             .then(response => response.json())
             .then(json => this.car = json)
             .catch(() => this.$router.push('/error'))
